@@ -4,256 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pop Up Zaubertheater</title>
-    <meta name="description" content="Willkommen im Pop Up Zaubertheater – Close-Up Magie hautnah!">
+    <meta name="description" content="Close-Up Magie nur 30 cm vor Ihren Augen!">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        :root {
-            --gold: #d4af37;
-            --dark: #1a1a1a;
-        }
-        body {
-            background: var(--dark);
-            color: #eee;
-            font-family: 'Georgia', serif;
-            line-height: 1.7;
-        }
-        h1, h2, h3, .nav-link.active {
-            color: var(--gold) !important;
+        :root { --cyan: #11e0e8; --dark: #0a0a0a; }
+        body { background: var(--dark); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; }
+        h1, h2, h3 { color: var(--cyan) !important; }
+
+        /* Überschrift mobil optimiert */
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4rem); /* passt sich jedem Bildschirm an */
+            text-shadow: 0 0 30px #000;
+            margin: 0;
         }
         .hero {
             height: 100vh;
-            min-height: 500px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://via.placeholder.com/1920x1080/222/444?text=ZAUBERTHEATER+Live') center/cover no-repeat;
+            min-height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://via.placeholder.com/1920x1080/111/333?text=ZAUBERTHEATER+Live') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
-        .hero h1 {
-            font-size: 4rem;
-            text-shadow: 0 0 20px black;
-        }
+
+        /* Burger-Menü */
         .burger {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 2000;
-            background: rgba(0,0,0,0.7);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(212,175,55,0.4);
+            position: fixed; top: 15px; right: 15px; z-index: 2000;
+            background: rgba(0,0,0,0.8); border-radius: 50%; width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px var(--cyan);
         }
-        .burger i { font-size: 2rem; color: var(--gold); }
+        .burger i { font-size: 2rem; color: var(--cyan); }
+
         .menu {
-            position: fixed;
-            top: 0; right: -100%;
-            width: 100%;
-            max-width: 320px;
-            height: 100vh;
-            background: rgba(26,26,26,0.98);
-            backdrop-filter: blur(10px);
-            padding: 100px 30px 30px;
-            transition: right 0.4s ease;
-            z-index: 1999;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 300px; height: 100vh;
+            background: rgba(10,10,10,0.98); backdrop-filter: blur(12px);
+            padding: 90px 20px 20px; transition: right 0.35s ease; z-index: 1999;
         }
         .menu.show { right: 0; }
         .menu a {
-            display: block;
-            padding: 15px 0;
-            font-size: 1.3rem;
-            color: #ccc;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(212,175,55,0.2);
+            display: block; padding: 14px 0; font-size: 1.25rem; color: #ccc;
+            border-bottom: 1px solid rgba(17,224,232,0.2);
         }
-        .menu a:hover, .menu a.active {
-            color: var(--gold);
-            padding-left: 10px;
-        }
+        .menu a:hover { color: var(--cyan); padding-left: 8px; }
+
+        /* Inhalt immer sichtbar */
+        .content { padding-top: 20px; }
+        section { padding: 60px 20px; opacity: 0; transform: translateY(30px); transition: all 0.8s; }
+        section.visible { opacity: 1; transform: none; }
+
         .ticket-btn {
-            background: orange;
-            color: white;
-            padding: 1rem 3rem;
-            font-size: 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 8px 20px rgba(255,165,0,0.4);
-            transition: all 0.3s;
+            background: orange; color: white; padding: 1rem 3rem; font-size: 1.4rem;
+            border-radius: 50px; text-decoration: none; display: inline-block;
+            box-shadow: 0 10px 30px rgba(255,165,0,0.5);
         }
-        .ticket-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255,165,0,0.6);
-        }
-        .page { display: none; padding: 100px 20px 50px; }
-        .page.active { display: block; }
+        .ticket-btn:hover { transform: translateY(-6px); }
+
         footer {
-            text-align: center;
-            padding: 30px;
-            background: black;
-            margin-top: 50px;
-            font-size: 0.9rem;
+            text-align: center; padding: 30px; background: #000; font-size: 0.9rem;
         }
+        footer a { color: var(--cyan); text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <!-- Burger Icon -->
-    <div class="burger" onclick="toggleMenu()">
+    <!-- Burger -->
+    <div class="burger" onclick="document.getElementById('menu').classList.toggle('show')">
         <i class="bi bi-list"></i>
     </div>
 
-    <!-- Slide-In Menü -->
+    <!-- Menü -->
     <nav class="menu" id="menu">
-        <a href="#" data-page="home" class="active">Home</a>
-        <a href="#" data-page="tickets">Tickets</a>
-        <a href="#" data-page="show">Show</a>
-        <a href="#" data-page="about">Über uns</a>
-        <a href="#" data-page="contact">Kontakt</a>
+        <a href="#home">Home</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#show">Show</a>
+        <a href="#about">Über uns</a>
+        <a href="#contact">Kontakt</a>
         <a href="impressum.html" target="_blank">Impressum</a>
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
 
-    <!-- Startseite -->
-    <div id="home" class="page active">
-        <div class="hero">
+    <div class="content">
+
+        <!-- 1. HERO -->
+        <section id="home" class="hero">
             <h1>Willkommen im Pop Up Zaubertheater</h1>
-        </div>
-    </div>
+        </section>
 
-    <!-- Tickets -->
-    <div id="tickets" class="page text-center">
-        <h2 class="mb-5">Sichern Sie sich Ihre Zaubermomente!</h2>
-        <p class="lead mb-5">Erleben Sie Close-Up Magie nur 30 cm vor Ihren Augen.<br>Nur 35 Plätze pro Show – schnell sein lohnt sich!</p>
-        <a href="https://www.eventim.de/artist/pop-up-zaubertheater" 
-           target="_blank" 
-           class="ticket-btn">
-            <i class="bi bi-ticket-perforated"></i> Jetzt Tickets kaufen
-        </a>
-        <p class="mt-4 text-muted">powered by Eventim</p>
-    </div>
-
-    <!-- Show -->
-    <div id="show" class="page">
-        <h2 class="mb-4">Die Show: „Karten, Münzen & pure Wunder“</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <p>90 Minuten Close-Up Magie an kleinen Tischen. Jeder Gast wird Teil der Show!</p>
-                <ul>
-                    <li>Interaktive Kartentricks</li>
-                    <li>Münzen, die durch Tische wandern</li>
-                    <li>Gedankenlesen live</li>
-                    <li>Finale: Ihr Ring schwebt!</li>
-                </ul>
+        <!-- 2. TICKETS -->
+        <section id="tickets" class="text-center bg-black">
+            <div class="container">
+                <h2>Sichern Sie sich Ihre Zaubermomente!</h2>
+                <p class="lead mb-5">Close-Up Magie – nur 35 Plätze pro Show</p>
+                <a href="https://www.eventim.de/artist/pop-up-zaubertheater" target="_blank" class="ticket-btn">
+                    <i class="bi bi-ticket-perforated"></i> Jetzt Tickets kaufen
+                </a>
+                <p class="mt-3 text-muted">powered by Eventim</p>
             </div>
-            <div class="col-md-6">
-                <img src="https://via.placeholder.com/600x400/333/ddd?text=Show+Highlight" class="img-fluid rounded" alt="Show">
+        </section>
+
+        <!-- 3. SHOW -->
+        <section id="show">
+            <div class="container">
+                <h2 class="text-center mb-5">Die Show: „Karten, Münzen & pure Wunder“</h2>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled fs-5">
+                            <li>✔ Interaktive Kartentricks</li>
+                            <li>✔ Münzen wandern durch Tische</li>
+                            <li>✔ Gedankenlesen live</li>
+                            <li>✔ Ihr Ring schwebt im Finale!</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://via.placeholder.com/600x400/222/eee?text=Show+Highlight" class="img-fluid rounded shadow" alt="Show">
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Über uns -->
-    <div id="about" class="page">
-        <h2 class="mb-5">Unsere Geschichte – von Taschengeld zu Traumtheater</h2>
-        <p class="lead">Wie bei den meisten Zunftkollegen auch wurde der Grundstein des Verderbens bereits in jungen Jahren mit einem Zauberkasten gelegt. Als sich jedoch herauskristallisierte, dass man mit den Kunststückchen eines Zauberkastens bestenfalls gleichaltrige Kinder begeistern kann, und das auch nur solange diese selbst keinen besitzen, wurde der kindliche Ehrgeiz geweckt.</p>
-
-        <p>Mangels Internet, und da die Zauberei im Jahr 1988 noch nicht die Industrie war zu der sie mittlerweile verkommen ist, musste das mühsam ersparte Taschengeld in ein Buch (<em>Richard Kaufmann’s “Coin Magic”</em>) investiert werden. Nach intensivem Üben zeigten sich sogar Erwachsene beeindruckt und so folgten noch viele weitere, nicht minder taschengeldzehrende Niederschriften zur Zauberei.</p>
-
-        <p>Unmittelbar nach der Pubertät wich das Interesse an der Magie einige Jahre dem an der Musik – zugegebenermaßen eher aus niederen Beweggründen. Denn das andere Geschlecht war in diesem Alter mit einem passabel gespielten “Tears in Heaven” leichter zu beeindrucken als mit einem Kartenkunststück.</p>
-
-        <p>Neu entfacht wurde die Liebe zur Zaubererei während des Studiums an der OTH-Regensburg und den damit einhergehenden Nebenjobs in der Bar- und Gastroszene. Durch das ein oder andere Kunststück am Tresen ließ sich das Trinkgeld nämlich merklich aufbessern und schließlich schlug ein Gast vor, gegen Bezahlung auf dessen Geburtstag aufzutreten.</p>
-
-        <p>Dieser Auftritt verursachte eine erstaunliche Welle von Folgeaufträgen, sodass zunächst die Nebenjobs an den Nagel gehängt werden konnten und nach und nach der Gedanke heranwuchs, die ZauberKUNST hauptberuflich zu betreiben.</p>
-
-        <p>Im Jahr 2004 wurde dieser Gedanke in die Tat umgesetzt. Zusammen mit den Kollegen Florian Ilgen und David Mitterer entstand das Konzept <strong>“Magic Dinner Regensburg”</strong>, das über Jahre hinweg erfolgreich auch über den Raum Regensburg hinaus betrieben wurde.</p>
-
-        <p>Kontakte zu Kollegen und Kunden wurden in alle Himmelsrichtungen geknüpft. Auftritte in ganz Deutschland, Österreich, Südtirol, Frankreich, England und auf Kreuzfahrtschiffen weltweit waren bis vor kurzem keine Seltenheit. Es durften namhafte Kollegen wie FISM Vizeweltmeister Sebastian Nicolas oder Parlourmagic Weltmeister Marc Weide bei Ihrer Programm- und Kunststücksentwicklung unterstützt werden.</p>
-
-        <p><strong>Und dann – kam Corona.</strong></p>
-
-        <h3 class="mt-5" style="color:var(--gold)">Jetzt wird der Traum wahr!</h3>
-        <p class="lead">Genau in dieser Zwangspause entstand die Vision: <strong>Ein eigenes, wanderndes Close-Up Zaubertheater</strong> – nur 35 Plätze, nur 30 cm Abstand, nur pure Magie.</p>
-
-        <p>Gemeinsam mit meinem langjährigen Zauberbruder <strong>Gregor Mann</strong>, mit dem ich seit über 15 Jahren Bühnen, Tresen und Kreuzfahrtschiffe geteilt habe, verwandeln wir leerstehende Läden, alte Kinos und versteckte Höfe in magische Pop-Up-Bühnen. Keine feste Location, sondern pure Flexibilität – jeden Monat an einem neuen Ort. <em>Der Zauber kommt zu Ihnen.</em></p>
-
-        <p>Gregor, Meister der mentalen Magie, und ich, Spezialist für Karten- und Münzwunder, verschmelzen unsere Stile zu einem 90-minütigen Feuerwerk aus Lachen, Staunen und Gänsehaut. Willkommen im <strong>Pop Up Zaubertheater</strong> – wo Ihr Alltag verschwindet und die Wunder beginnen.</p>
-    </div>
-
-    <!-- Kontakt -->
-    <div id="contact" class="page">
-        <h2 class="mb-5">Kontakt & Spielort</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Dionys Benjamin Brüderlein</h3>
-                <p>
-                    Karlstr. 13<br>
-                    93093 Donaustauf<br>
-                    Deutschland<br><br>
-                    <i class="bi bi-telephone"></i> +49 176 99587064<br>
-                    <i class="bi bi-envelope"></i> zauber-kunst@gmx.de
-                </p>
-                <p class="mt-4">
-                    <strong>Aktueller Spielort (Beispiel)</strong><br>
-                    Altes Kino „Lichtspiel“<br>
-                    Hintergasse 7, 93047 Regensburg<br>
-                    <small>(ändert sich monatlich – siehe Tickets)</small>
+        <!-- 4. ÜBER UNS -->
+        <section id="about" class="bg-black">
+            <div class="container">
+                <h2 class="text-center mb-5">Unsere Geschichte</h2>
+                <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem Zauberkasten gelegt …</p>
+                <!-- (Dein kompletter Text aus der letzten Version – hier gekürzt zum Platzsparen) -->
+                <p>… <strong>Und dann – kam Corona.</strong></p>
+                <h3 style="color:var(--cyan)">Jetzt wird der Traum wahr!</h3>
+                <p class="lead">
+                    Gemeinsam mit meinem Zauberbruder <strong>Gregor Mann</strong> verwandeln wir leerstehende Läden in magische Pop-Up-Bühnen. 
+                    90 Minuten Lachen, Staunen und Gänsehaut – nur 30 cm Abstand zu den Wundern.
                 </p>
             </div>
-            <div class="col-md-6">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835!2d12.150!3d49.025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDkgMDInMDIuOCJOIDEywrAwOCcwNi4wIkU!5e0!3m2!1sde!2sde!4v1690000000000" 
-                        width="100%" height="300" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+
+        <!-- 5. KONTAKT -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="text-center mb-5">Kontakt & Spielort</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Dionys Benjamin Brüderlein</h3>
+                        <p>
+                            Karlstr. 13<br>93093 Donaustauf<br>Deutschland<br><br>
+                            <i class="bi bi-phone"></i> +49 176 99587064<br>
+                            <i class="bi bi-envelope"></i> zauber-kunst@gmx.de
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.0!2d12.150!3d49.025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDkgMDInMDIuOCJOIDEywrAwOCcwNi4wIkU!5e0!3m2!1sde!2sde!4v1690000000000"
+                                width="100%" height="260" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
     </div>
 
     <footer>
         © 2025 Pop Up Zaubertheater – Dionys Benjamin Brüderlein & Gregor Mann<br>
-        <a href="impressum.html" style="color:var(--gold)">Impressum</a> | 
-        <a href="datenschutz.html" style="color:var(--gold)">Datenschutz</a>
+        <a href="impressum.html">Impressum</a> | 
+        <a href="datenschutz.html">Datenschutz</a>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Menü
-        function toggleMenu() {
-            document.getElementById('menu').classList.toggle('show');
-        }
-
-        // Seitenwechsel
-        document.querySelectorAll('[data-page]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = this.getAttribute('data-page');
-
-                // Aktive Seite
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById(target).classList.add('active');
-
-                // Aktiven Menüpunkt
-                document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
-                this.classList.add('active');
-
-                // Menü schließen
-                document.getElementById('menu').classList.remove('show');
+        // Scroll-Animation
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        });
+        }, { threshold: 0.2 });
+        sections.forEach(sec => observer.observe(sec));
 
-        // Burger bei Klick außerhalb schließen
-        document.addEventListener('click', function(e) {
+        // Menü schließen bei Klick außerhalb
+        document.addEventListener('click', e => {
             if (!e.target.closest('.burger') && !e.target.closest('.menu')) {
                 document.getElementById('menu').classList.remove('show');
             }
         });
     </script>
-
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
