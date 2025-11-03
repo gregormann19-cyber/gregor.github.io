@@ -1,146 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pop Up Zaubertheater — Willkommen</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pop Up Zaubertheater</title>
   <style>
-    :root{--accent:#11e0e8;--bg:#0b0b0b;--card:#111111;--glass:rgba(255,255,255,0.03);--ticket:#ff8c00}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%);color:#f6f6f6}
-    a{color:inherit;text-decoration:none;scroll-behavior:smooth}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: white;
+      text-align: center;
+    }
 
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;position:sticky;top:0;background:linear-gradient(180deg, rgba(11,11,11,0.6), rgba(11,11,11,0.3));backdrop-filter:saturate(120%) blur(6px);z-index:40}
-    .logo{font-weight:700;letter-spacing:0.6px}
-    .nav-toggle{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-    .burger{width:20px;height:2px;background:var(--accent);position:relative;border-radius:2px}
-    .burger::before,.burger::after{content:'';position:absolute;left:0;right:0;height:2px;background:var(--accent);border-radius:2px}
-    .burger::before{top:-6px}
-    .burger::after{bottom:-6px}
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      padding: 10px;
+      z-index: 1000;
+    }
 
-    /* Off-canvas nav */
-    nav{position:fixed;right:20px;top:70px;background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.6);display:none;min-width:170px}
-    nav a{display:block;padding:10px 8px;border-radius:8px;margin:4px 0}
-    nav a:hover{background:var(--glass)}
-    nav a#tickets-link{color:var(--ticket);font-weight:bold}
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      position: relative;
+    }
 
-    /* Hero */
-    .hero{max-width:980px;margin:36px auto;padding:20px}
-    h1{color:var(--accent);font-size:clamp(28px,5vw,48px);margin:6px 0}
-    .subtitle{color:#cfdcdc;margin:8px 0 18px}
-    .hero-photo{display:block;width:100%;max-height:520px;object-fit:cover;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+    header a:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      color: #11e0e8;
+      padding: 5px 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
 
-    /* Content card */
-    .content{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
-    .bio h2{color:var(--accent);margin:0 0 8px}
-    .bio p{line-height:1.6;margin:0}
+    section {
+      padding: 100px 20px;
+    }
 
-    section[id]{scroll-margin-top:80px}
+    h1 {
+      color: #11e0e8;
+      margin-top: 80px;
+    }
 
-    /* Footer */
-    footer{max-width:980px;margin:30px auto;padding:20px;display:flex;justify-content:space-between;align-items:center}
-    .socials{display:flex;gap:12px}
-    .icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);cursor:pointer}
+    img.hero {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
 
-    /* Responsive */
-    @media(min-width:800px){
-      .content{grid-template-columns:1fr 340px}
-      .hero{margin-top:48px}
-      nav{right:40px}
+    .ticket-button {
+      background-color: orange;
+      color: black;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .ticket-button:hover {
+      background-color: #ffb84d;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: #111;
+    }
+
+    footer a {
+      color: #11e0e8;
+      margin: 0 10px;
+      font-size: 20px;
+      text-decoration: none;
     }
   </style>
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </head>
 <body>
   <header>
-    <div class="logo">Pop Up Zaubertheater</div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <nav aria-label="Hauptnavigation" id="topNav" style="display:none">
-        <a id="tickets-link" href="#tickets">Tickets</a>
-        <a href="#show">Show</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="#ueber">Über uns</a>
-        <a href="#impressum" id="impressum-link">Impressum</a>
-      </nav>
-      <button class="nav-toggle" id="navBtn" aria-label="Menü öffnen">
-        <span class="burger"></span>
-      </button>
-    </div>
+    <a href="#" onclick="scrollToSection('tickets')" title="Tickets">🎟️</a>
+    <a href="#" onclick="scrollToSection('show')" title="Show">✨</a>
+    <a href="#" onclick="scrollToSection('kontakt')" title="Kontakt">📞</a>
+    <a href="#" onclick="scrollToSection('zauberer')" title="Der Zauberer">🧙‍♂️</a>
+    <a href="impressum.html" title="Impressum">📜</a>
+    <a href="#" title="Twitter / X">🐦</a> <!-- Link zu X/Twitter hier einfügen -->
+    <a href="#" title="Instagram">📷</a> <!-- Link zu Instagram hier einfügen -->
   </header>
 
-  <main class="hero" id="top">
+  <section id="home">
     <h1>Willkommen im Pop Up Zaubertheater</h1>
-    <p class="subtitle">Close‑up Magie, Nahaufnahmen und überraschende Momente — direkt vor Ihren Augen.</p>
+    <img src="assets/hero.jpg" alt="Zauberer Bild" class="hero">
+  </section>
 
-    <img src="assets/hero.jpg" alt="Foto des Zauberkünstlers" class="hero-photo" id="heroPhoto" onerror="this.onerror=null;this.src='https://via.placeholder.com/1200x700?text=Foto+hier+einfügen'">
+  <section id="tickets">
+    <h2 style="color:#11e0e8;">Tickets</h2>
+    <p>Erlebe die Magie hautnah und sichere dir jetzt dein Ticket für das Pop Up Zaubertheater.</p>
+    <a href="#" class="ticket-button">Tickets buchen</a> <!-- Hier Ticket-Link (z. B. Eventim) einfügen -->
+  </section>
 
-    <div class="content">
-      <section class="card bio" id="ueber">
-        <h2>Der Zauberer</h2>
-        <p>Er ist 35 Jahre alt und hat seine Leidenschaft für die Zauberkunst mit 19 Jahren entdeckt, als er einem Straßenzauberer zusah. Jahre voller Übung, Auftritte und Geschichten später wurde aus dem Traum vom eigenen Close‑up Zaubertheater Wirklichkeit. Heute bringt er Eleganz, Humor und verblüffende Fingerfertigkeit in intime Shows — immer mit dem Ziel, Menschen unmittelbar zu berühren.</p>
-      </section>
+  <section id="show">
+    <h2 style="color:#11e0e8;">Show</h2>
+    <p>Erlebe zwei einzigartige Showteile à 45 Minuten mit faszinierenden Close-up-Zauberkunststücken. 
+      In dieser intimen Atmosphäre verschwimmen Realität und Illusion – direkt vor deinen Augen, zum Greifen nah.</p>
+  </section>
 
-      <aside class="card">
-        <h3 style="color:var(--accent);margin-top:0">Schnellzugriff</h3>
-        <p style="margin:8px 0">Wählen Sie eines der Menüpunkte über das Burger‑Icon oben rechts.</p>
-        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-          <a href="#tickets">Tickets</a>
-          <a href="#show">Show</a>
-          <a href="#kontakt">Kontakt</a>
-          <a href="#ueber">Über uns</a>
-          <a href="#impressum" id="impressum-link-2">Impressum (Öffnet neue Seite)</a>
-        </div>
-      </aside>
-    </div>
+  <section id="kontakt">
+    <h2 style="color:#11e0e8;">Kontakt</h2>
+    <p>Für Anfragen, Buchungen oder Kooperationen – wir freuen uns auf deine Nachricht!</p>
+    <!-- Hier Kontaktformular oder Mail-Link einfügen -->
+  </section>
 
-    <section id="tickets" class="card" style="margin-top:30px">
-      <h2 style="color:var(--ticket)">Tickets</h2>
-      <p>Buchen Sie Ihre Tickets ganz einfach online.</p>
-      <!-- 💡 HIER den Ticket-Link einfügen, z. B. Eventim oder eigene Verkaufsseite -->
-      <a href="#" style="color:var(--ticket);text-decoration:underline">Tickets jetzt sichern</a>
-    </section>
-
-    <section id="show" class="card" style="margin-top:30px">
-      <h2 style="color:var(--accent)">Show</h2>
-      <p>Erleben Sie faszinierende Close‑up‑Magie in einer intimen Atmosphäre.</p>
-    </section>
-
-    <section id="kontakt" class="card" style="margin-top:30px">
-      <h2 style="color:var(--accent)">Kontakt</h2>
-      <p>Haben Sie Fragen oder möchten Sie eine Buchung anfragen?</p>
-      <!-- 💡 HIER E-Mail-Link oder Kontaktformular-Link einfügen -->
-      <p><a href="mailto:info@popupzaubertheater.de" style="color:var(--accent)">info@popupzaubertheater.de</a></p>
-    </section>
-  </main>
+  <section id="zauberer">
+    <h2 style="color:#11e0e8;">Der Zauberer</h2>
+    <p>Mit 19 Jahren begann seine Leidenschaft für die Magie, nachdem er einen Straßenzauberer gesehen hatte. 
+      Heute – 16 Jahre später – verwirklicht er seinen Traum vom eigenen Close-up-Zaubertheater. 
+      Seine Kunst verbindet Fingerspitzengefühl, Humor und echte Wunder – unmittelbar vor den Augen des Publikums.</p>
+  </section>
 
   <footer>
-    <div style="font-size:14px;opacity:0.9">© <span id="year"></span> Pop Up Zaubertheater</div>
-    <div class="socials">
-      <!-- 💡 X (Twitter) Link hier anpassen -->
-      <a class="icon" href="https://x.com/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="X">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 4.01c-.8.36-1.66.6-2.56.71.92-.55 1.62-1.42 1.95-2.46-.86.51-1.82.88-2.84 1.08C18.9 2.26 17.7 1.7 16.4 1.7c-2.36 0-4.28 1.92-4.28 4.29 0 .34.04.67.11.99C7.7 6.7 4.07 4.9 1.64 1.88c-.37.64-.58 1.38-.58 2.17 0 1.5.77 2.82 1.94 3.6-.72-.02-1.4-.22-1.99-.55v.06c0 2.1 1.5 3.85 3.48 4.24-.36.1-.75.15-1.15.15-.28 0-.55-.03-.82-.07.55 1.73 2.16 2.99 4.06 3.03-1.49 1.17-3.36 1.87-5.4 1.87-.35 0-.7-.02-1.04-.06 1.92 1.24 4.2 1.96 6.65 1.96 7.98 0 12.35-6.61 12.35-12.34v-.56c.85-.62 1.57-1.4 2.15-2.29-.78.35-1.62.59-2.5.7z" fill="currentColor"/></svg>
-      </a>
-      <!-- 💡 Instagram-Link hier einfügen -->
-      <a class="icon" href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2A4.8 4.8 0 1 0 16.8 13 4.8 4.8 0 0 0 12 8.2zm6.6-3.3a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z" fill="currentColor"/></svg>
-      </a>
-    </div>
+    <p>Folge uns auf Social Media:</p>
+    <a href="#">🐦</a> <!-- X/Twitter-Link hier einfügen -->
+    <a href="#">📷</a> <!-- Instagram-Link hier einfügen -->
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const navBtn = document.getElementById('navBtn');
-    const topNav = document.getElementById('topNav');
-    navBtn.addEventListener('click', ()=>{
-      const isOpen = topNav.style.display === 'block';
-      topNav.style.display = isOpen ? 'none' : 'block';
-    });
-
-    const impressumHTML = `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Impressum — Pop Up Zaubertheater</title><style>body{font-family:Inter,system-ui,Arial;line-height:1.6;padding:28px;color:#111;background:#fff}h1{color:#11e0e8}a{color:#11e0e8}</style></head><body><h1>Impressum</h1><p>Angaben gemäß § 5 TMG:</p><p>Pop Up Zaubertheater<br>Musterstraße 12<br>10115 Berlin</p><p><strong>Vertreten durch:</strong><br>Max Mustermann</p><p><strong>Kontakt:</strong><br>Telefon: +49 30 1234567<br>E‑Mail: info@popupzaubertheater.de</p><p><strong>Umsatzsteuer-ID:</strong><br>DE123456789</p><p><strong>Verantwortlich für den Inhalt:</strong><br>Max Mustermann, Musterstraße 12, 10115 Berlin</p><p><a href="#" onclick="window.close();return false">Fenster schließen</a></p></body></html>`;
-    function openImpressum(){const w=window.open('','_blank');if(!w){alert('Popup blockiert');return;}w.document.open();w.document.write(impressumHTML);w.document.close();}
-    document.getElementById('impressum-link').addEventListener('click', e=>{e.preventDefault();openImpressum();});
-    document.getElementById('impressum-link-2').addEventListener('click', e=>{e.preventDefault();openImpressum();});
-  </script>
 </body>
 </html>
