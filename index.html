@@ -39,6 +39,53 @@
       color: #11e0e8;
     }
 
+    /* Burger Menü */
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px;
+      transition: 0.4s;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-active {
+      display: flex !important;
+      flex-direction: column;
+      background-color: rgba(0,0,0,0.95);
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
+      header {
+        justify-content: space-between;
+        padding: 10px 20px;
+      }
+    }
+
     section {
       padding: 120px 20px;
     }
@@ -88,15 +135,27 @@
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
+
+    function toggleMenu() {
+      const nav = document.querySelector('.nav-links');
+      nav.classList.toggle('nav-active');
+    }
   </script>
 </head>
 <body>
   <header>
-    <a href="#" onclick="scrollToSection('tickets')">Tickets</a>
-    <a href="#" onclick="scrollToSection('show')">Show</a>
-    <a href="#" onclick="scrollToSection('zauberer')">Über uns</a>
-    <a href="#" onclick="scrollToSection('kontakt')">Kontakt</a>
-    <a href="impressum.html">Impressum</a>
+    <div class="burger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#" onclick="scrollToSection('tickets')">Tickets</a>
+      <a href="#" onclick="scrollToSection('show')">Show</a>
+      <a href="#" onclick="scrollToSection('zauberer')">Über uns</a>
+      <a href="#" onclick="scrollToSection('kontakt')">Kontakt</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
   </header>
 
   <section id="home">
@@ -131,8 +190,9 @@
 
   <footer>
     <p>Folge uns auf Social Media:</p>
-    <a href="#">🐦</a> <!-- X/Twitter-Link hier einfügen -->
+    <a href="#">𝔵</a> <!-- X/Twitter-Link hier einfügen -->
     <a href="#">📷</a> <!-- Instagram-Link hier einfügen -->
   </footer>
 </body>
 </html>
+
