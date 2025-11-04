@@ -12,36 +12,31 @@
         body { background: var(--dark); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
 
-        /* HERO: Überschrift mittig über Bild */
+        /* HERO: Überschrift mittig */
         .hero {
             min-height: 100vh;
-            background: var(--dark);
-            padding: 120px 20px 80px;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        url('hero.jpg') center/cover no-repeat;
+            padding: 160px 20px 60px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
         }
         .hero h1 {
-            font-size: clamp(2.5rem, 10vw, 6rem);
-            margin: 0 0 40px 0;
-            text-shadow: 0 0 30px rgba(0,0,0,0.9);
-            max-width: 90%;
+            font-size: clamp(2.4rem, 9vw, 5.5rem);
+            text-shadow: 0 0 30px #000;
+            margin: 0 0 30px 0;
         }
-        .hero-image {
+        .hero .photo-placeholder {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(17,224,232,0.4);
-            border: 4px solid var(--cyan);
-        }
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
+            height: 60vh;
+            min-height: 400px;
+            background: rgba(255,255,255,0.05);
+            border: 3px dashed var(--cyan);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--cyan);
         }
 
         /* Burger */
@@ -78,7 +73,7 @@
         }
         .ticket-btn:hover { transform: translateY(-6px); }
 
-        /* Team-Fotos */
+        /* Zwei Fotos nebeneinander */
         .team-photos {
             display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px;
         }
@@ -115,9 +110,7 @@
     <!-- 1. HERO -->
     <section id="home" class="hero">
         <h1>Willkommen im Pop Up Zaubertheater</h1>
-        <div class="hero-image">
-            <img src="hero.jpg" alt="Pop Up Zaubertheater – Close-Up Magie hautnah">
-        </div>
+       
     </section>
 
     <!-- 2. TICKETS -->
@@ -126,7 +119,9 @@
             <h2>Sichern Sie sich Ihre Zaubermomente!</h2>
             <p class="lead mb-5">Close-Up Magie – nur 35 Plätze pro Show</p>
             <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-btn">
-                Jetzt Tickets kaufen
+  Tickets sichern
+            </a>
+                <i class="bi bi-ticket-perforated"></i> Jetzt Tickets kaufen
             </a>
             <p class="mt-3 text-muted">powered by Eventim</p>
         </div>
@@ -139,10 +134,10 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <ul class="list-unstyled fs-5">
-                        <li>Interaktive Kartentricks</li>
-                        <li>Münzen wandern durch Tische</li>
-                        <li>Gedankenlesen live</li>
-                        <li>Ihr Ring schwebt im Finale!</li>
+                        <li>✔ Interaktive Kartentricks</li>
+                        <li>✔ Münzen wandern durch Tische</li>
+                        <li>✔ Gedankenlesen live</li>
+                        <li>✔ Ihr Ring schwebt im Finale!</li>
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -167,7 +162,7 @@
             <!-- ZWEI HOCHFORMAT-FOTOS -->
             <div class="team-photos">
                 <div>
-                    <img src="https://via.placeholder.com/300x480/222/eee?text=GREGOR+MANN" alt="Gregor Mann">
+                   <img src="gregor-mann.jpg" alt="Gregor Mann">
                     <div class="caption">Foto: Gregor Mann</div>
                 </div>
                 <div>
@@ -187,8 +182,8 @@
                     <h3>Dionys Benjamin Brüderlein</h3>
                     <p>
                         Karlstr. 13<br>93093 Donaustauf<br>Deutschland<br><br>
-                        +49 176 99587064<br>
-                        zauber-kunst@gmx.de
+                        <i class="bi bi-phone"></i> +49 176 99587064<br>
+                        <i class="bi bi-envelope"></i> zauber-kunst@gmx.de
                     </p>
                 </div>
                 <div class="col-md-6">
