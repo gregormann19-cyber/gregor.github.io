@@ -12,7 +12,7 @@
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
 
-        /* ==== HERO – DESKTOP: ABSOLUTES BILD, ÜBERSCHRIFT OBEN ==== */
+        /* ==== HERO – DESKTOP: BILD HELL, KEIN OVERLAY ==== */
         .hero {
             position: relative;
             height: 80vh;
@@ -24,13 +24,10 @@
             padding-top: 80px;
             text-align: center;
         }
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
-            z-index: 1;
-        }
+
+        /* OVERLAY KOMPLETT ENTFERNT – BILD BLEIBT 100% HELL */
+        /* .hero::before { ... } ← GELÖSCHT */
+
         .hero-img {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -38,19 +35,25 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
-            z-index: 0;
+            z-index: 1;
         }
+
         .hero h1 {
             position: relative;
             z-index: 2;
             font-size: clamp(2.2rem, 8vw, 4.5rem);
-            text-shadow: 0 0 30px #000;
+            text-shadow: 
+                0 0 12px rgba(0,0,0,0.9),
+                0 2px 8px rgba(0,0,0,0.85),
+                0 4px 20px rgba(0,0,0,0.8);
             margin: 0;
             padding: 0 20px;
             max-width: 90%;
+            font-weight: 700;
+            color: var(--cyan);
         }
 
-        /* ==== MOBILE: ÜBERSCHRIFT ÜBER BILD, CTA DIREKT DARUNTER ==== */
+        /* ==== MOBILE: BILD HELL, ÜBERSCHRIFT OBEN ==== */
         @media (max-width: 767px) {
             .hero {
                 position: relative;
@@ -60,12 +63,10 @@
                 overflow: hidden;
                 text-align: center;
             }
-            .hero::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                z-index: 1;
-            }
+
+            /* KEIN OVERLAY AUF MOBILE */
+            /* .hero::before { ... } ← GELÖSCHT */
+
             .hero-img {
                 position: relative;
                 width: 100%;
@@ -75,8 +76,9 @@
                 object-position: center top;
                 display: block;
                 margin: 0 auto;
-                z-index: 0;
+                z-index: 1;
             }
+
             .hero h1 {
                 position: absolute;
                 top: 20px;
@@ -84,26 +86,29 @@
                 transform: translateX(-50%);
                 z-index: 2;
                 font-size: clamp(1.8rem, 7vw, 3.5rem);
-                text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+                text-shadow: 
+                    0 0 10px rgba(0,0,0,0.95),
+                    0 2px 6px rgba(0,0,0,0.9),
+                    0 4px 15px rgba(0,0,0,0.85);
                 margin: 0;
                 padding: 0 15px;
                 max-width: 90%;
                 width: 100%;
                 color: var(--cyan);
-            }    /* Mobile: kleinerer, besser sichtbarer Burger-Button */
-    .burger {
-        width: 46px;     /* vorher 56px */
-        height: 46px;
-        top: 12px;
-        right: 12px;
-        box-shadow: 0 0 15px var(--cyan); /* etwas dezenter */
-    }
+                font-weight: 700;
+            }
 
-    .burger i {
-        font-size: 1.6rem;  /* vorher 2rem */
-        color: #9ffcff;     /* helleres Cyan → bessere Sichtbarkeit */
-    }
-
+            .burger {
+                width: 46px;
+                height: 46px;
+                top: 12px;
+                right: 12px;
+                box-shadow: 0 0 15px var(--cyan);
+            }
+            .burger i {
+                font-size: 1.6rem;
+                color: #9ffcff;
+            }
         }
 
         /* ==== CTA-BAR ==== */
@@ -195,7 +200,6 @@
         <a href="impressum.html" target="_blank">Impressum</a>
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
-
     <!-- 1. HERO MIT CTA-BAR -->
     <section id="home" class="hero">
         <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
@@ -209,7 +213,6 @@
             <i class="bi bi-chevron-down"></i> Mehr erfahren
         </div>
     </div>
-
     <!-- 2. TICKETS -->
     <section id="tickets" class="text-center bg-black">
         <div class="container">
@@ -221,7 +224,6 @@
             <p class="mt-3 text-muted">powered by Eventim</p>
         </div>
     </section>
-
     <!-- 3. SHOW -->
     <section id="show">
         <div class="container">
@@ -241,7 +243,6 @@
             </div>
         </div>
     </section>
-
     <!-- 4. ÜBER UNS -->
     <section id="about" class="bg-black">
         <div class="container">
@@ -265,7 +266,6 @@
             </div>
         </div>
     </section>
-
     <!-- 5. KONTAKT -->
     <section id="contact">
         <div class="container">
@@ -291,13 +291,11 @@
             </div>
         </div>
     </section>
-
     <footer>
-        © 2025 Pop Up Magietheater – Dionys Benjamin Brüderlein & Gregor Mann<br>
+        © 2025 Pop Up Magietheater – Dionys Benjamin Brüderleinn & Gregor Mann<br>
         <a href="impressum.html">Impressum</a> |
         <a href="datenschutz.html">Datenschutz</a>
     </footer>
-
     <script>
         function closeMenu() {
             document.getElementById('menu').classList.remove('show');
