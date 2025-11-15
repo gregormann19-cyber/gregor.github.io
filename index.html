@@ -12,15 +12,16 @@
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
 
-        /* ==== HERO – BILD STARTET OBEN, UNTEN ABGESCHNITTEN ==== */
+        /* ==== HERO – FESTE HÖHE, BILD OBEN, ÜBERSCHRIFT OBEN ==== */
         .hero {
             position: relative;
-            min-height: 100vh;
+            height: 80vh;
+            max-height: 800px;
             overflow: hidden;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 120px 20px 80px;
+            padding-top: 80px;
             text-align: center;
         }
 
@@ -28,7 +29,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
             z-index: 1;
         }
 
@@ -37,32 +38,71 @@
             top: 0; left: 0; right: 0; bottom: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Vollständig sichtbar auf Mobil */
-            object-position: center top; /* Oben ausrichten → unten bleibt frei/abschneiden */
+            object-fit: cover;
+            object-position: center top;
             z-index: 0;
-        }
-
-        /* Desktop & große Bildschirme: Bild füllt Breite, unten abschneiden */
-        @media (min-width: 768px) {
-            .hero-img {
-                object-fit: cover; /* Deckt alles ab */
-                object-position: center top; /* Oben priorisieren, unten abschneiden */
-            }
-        }
-
-        /* Mobil: Padding-top reduzieren für nahtlosen Start */
-        @media (max-width: 767px) {
-            .hero {
-                padding-top: 70px; /* Platz für Burger & Browser-Bar */
-            }
         }
 
         .hero h1 {
             position: relative;
             z-index: 2;
-            font-size: clamp(2.4rem, 9vw, 5.5rem);
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             text-shadow: 0 0 30px #000;
             margin: 0;
+            padding: 0 20px;
+            max-width: 90%;
+        }
+
+        /* Mobil: Überschrift höher */
+        @media (max-width: 767px) {
+            .hero {
+                padding-top: 60px;
+                height: 75vh;
+            }
+            .hero h1 {
+                font-size: clamp(1.8rem, 7vw, 3.5rem);
+            }
+        }
+
+        /* ==== CTA-BAR UNTER DEM HERO ==== */
+        .hero-cta {
+            background: rgba(17, 224, 232, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(17, 224, 232, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-cta a {
+            background: orange;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(255,165,0,0.4);
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+
+        .hero-cta a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255,165,0,0.6);
+        }
+
+        .hero-cta .scroll-hint {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         /* ==== RESTLICHER CODE UNVERÄNDERT ==== */
@@ -88,13 +128,6 @@
         section { padding: 80px 20px; opacity: 0; transform: translateY(30px); transition: all 0.8s; }
         section.visible { opacity: 1; transform: none; }
         .bg-black { background: #000; }
-        .ticket-btn {
-            background: orange; color: white; padding: 1rem 3.5rem; font-size: 1.5rem;
-            border-radius: 50px; text-decoration: none; display: inline-block;
-            box-shadow: 0 10px 30px rgba(255,165,0,0.5);
-            transition: all 0.3s;
-        }
-        .ticket-btn:hover { transform: translateY(-6px); }
         .team-photos {
             display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px;
         }
@@ -110,6 +143,7 @@
     </style>
 </head>
 <body>
+
     <!-- Burger -->
     <div class="burger" id="burger">
         <i class="bi bi-list"></i>
@@ -126,11 +160,20 @@
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
 
-    <!-- 1. HERO -->
+    <!-- 1. HERO MIT CTA-BAR -->
     <section id="home" class="hero">
-        <img src="hero.jpg" alt="Zaubertheater Hintergrund" class="hero-img">
+        <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
         <h1>Willkommen im Pop Up Zaubertheater</h1>
     </section>
+
+    <div class="hero-cta">
+        <a href="#tickets">
+            <i class="bi bi-ticket-perforated"></i> Jetzt Tickets sichern
+        </a>
+        <div class="scroll-hint">
+            <i class="bi bi-chevron-down"></i> Mehr erfahren
+        </div>
+    </div>
 
     <!-- 2. TICKETS -->
     <section id="tickets" class="text-center bg-black">
