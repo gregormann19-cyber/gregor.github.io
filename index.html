@@ -173,6 +173,31 @@
             text-align: center; padding: 40px; background: #000; font-size: 0.95rem;
         }
         footer a { color: var(--cyan); text-decoration: none; margin: 0 10px; }
+        /* Neue Styles für Ticket-Felder */
+        .ticket-field {
+            background: orange;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 15px rgba(255,165,0,0.3);
+            transition: all 0.3s;
+        }
+        .ticket-field:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,165,0,0.5);
+        }
+        .ticket-date {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .ticket-icon {
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -211,8 +236,17 @@
         <div class="container">
             <h2>Sichern Sie sich magische Momente!</h2>
             <p class="lead mb-5">Close-Up Magie – nur 35 Plätze pro Show</p>
-            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-btn">
-                <i class="bi bi-ticket-perforated"></i> Jetzt Tickets kaufen
+            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-field">
+                <div class="ticket-date">25.01.2026</div>
+                <i class="bi bi-ticket-perforated ticket-icon"></i> Ticket
+            </a>
+            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-field">
+                <div class="ticket-date">25.01.2026</div>
+                <i class="bi bi-ticket-perforated ticket-icon"></i> Ticket
+            </a>
+            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-field">
+                <div class="ticket-date">25.01.2026</div>
+                <i class="bi bi-ticket-perforated ticket-icon"></i> Ticket
             </a>
             <p class="mt-3 text-muted">powered by Eventim</p>
         </div>
