@@ -11,113 +11,116 @@
         :root { --cyan: #11e0e8; --light: #0a0a0a; }
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
-       /* ==== HERO – FESTE HÖHE, BILD OBEN, ÜBERSCHRIFT OBEN ==== */
-.hero {
-    position: relative;
-    height: 80vh;
-    max-height: 800px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 80px;
-    text-align: center;
-}
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
-    z-index: 1;
-}
-.hero-img {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    z-index: 0;
-}
-.hero h1 {
-    position: relative;
-    z-index: 2;
-    font-size: clamp(2.2rem, 8vw, 4.5rem);
-    text-shadow: 0 0 30px #000;
-    margin: 0;
-    padding: 0 20px;
-    max-width: 90%;
-}
-/* ==== MOBILE ANPASSUNGEN – VOLLSTÄNDIGES BILD, ZENTRIERT, ÜBERSCHRIFT OBEN ==== */
-@media (max-width: 767px) {
-    .hero {
-        height: auto;
-        min-height: 60vh;
-        padding-top: 80px;
-        display: block;
-        text-align: center;
-        position: relative;
-    }
-    .hero-img {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        object-position: center top;
-        display: block;
-        margin: 0 auto;
-        z-index: 0;
-    }
-    .hero h1 {
-        position: relative;
-        z-index: 2;
-        margin-top: 20px;
-        margin-bottom: 0;
-        font-size: clamp(1.8rem, 7vw, 3.5rem);
-        text-align: center;
-        padding: 0 15px;
-    }
-    .hero::before {
-        display: none;
-    }
-}
-/* ==== CTA-BAR UNTER DEM HERO ==== */
-.hero-cta {
-    background: rgba(17, 224, 232, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid rgba(17, 224, 232, 0.3);
-    position: relative;
-    z-index: 10;
-}
-.hero-cta a {
-    background: orange;
-    color: white;
-    padding: 1rem 3rem;
-    font-size: 1.4rem;
-    border-radius: 50px;
-    text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 8px 25px rgba(255,165,0,0.4);
-    transition: all 0.3s;
-    margin: 0 10px;
-}
-.hero-cta a:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(255,165,0,0.6);
-}
-.hero-cta .scroll-hint {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: var(--cyan);
-    animation: bounce 2s infinite;
-}
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
+
+        /* ==== HERO – DESKTOP: ABSOLUTES BILD, ÜBERSCHRIFT OBEN ==== */
+        .hero {
+            position: relative;
+            height: 80vh;
+            max-height: 800px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 80px;
+            text-align: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
+            z-index: 1;
+        }
+        .hero-img {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            z-index: 0;
+        }
+        .hero h1 {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            text-shadow: 0 0 30px #000;
+            margin: 0;
+            padding: 0 20px;
+            max-width: 90%;
+        }
+
+        /* ==== MOBILE: BILD VOLLSTÄNDIG, ZENTRIERT, KEIN ZOOM ==== */
+        @media (max-width: 767px) {
+            .hero {
+                height: auto;
+                min-height: 60vh;
+                padding-top: 80px;
+                display: block; /* Flex deaktivieren */
+                text-align: center;
+            }
+            .hero::before {
+                display: none; /* Gradient stört bei contain */
+            }
+            .hero-img {
+                position: relative;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+                object-position: center top;
+                display: block;
+                margin: 0 auto;
+                z-index: 0;
+            }
+            .hero h1 {
+                position: relative;
+                z-index: 2;
+                margin-top: 20px;
+                margin-bottom: 0;
+                font-size: clamp(1.8rem, 7vw, 3.5rem);
+                text-align: center;
+                padding: 0 15px;
+            }
+        }
+
+        /* ==== CTA-BAR ==== */
+        .hero-cta {
+            background: rgba(17, 224, 232, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(17, 224, 232, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+        .hero-cta a {
+            background: orange;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(255,165,0,0.4);
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        .hero-cta a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255,165,0,0.6);
+        }
+        .hero-cta .scroll-hint {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         /* ==== RESTLICHER CODE UNVERÄNDERT ==== */
         .burger {
             position: fixed; top: 15px; right: 15px; z-index: 2000;
@@ -170,6 +173,7 @@
         <a href="impressum.html" target="_blank">Impressum</a>
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
+
     <!-- 1. HERO MIT CTA-BAR -->
     <section id="home" class="hero">
         <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
@@ -183,6 +187,7 @@
             <i class="bi bi-chevron-down"></i> Mehr erfahren
         </div>
     </div>
+
     <!-- 2. TICKETS -->
     <section id="tickets" class="text-center bg-black">
         <div class="container">
@@ -194,6 +199,7 @@
             <p class="mt-3 text-muted">powered by Eventim</p>
         </div>
     </section>
+
     <!-- 3. SHOW -->
     <section id="show">
         <div class="container">
@@ -213,17 +219,17 @@
             </div>
         </div>
     </section>
+
     <!-- 4. ÜBER UNS -->
     <section id="about" class="bg-black">
         <div class="container">
             <h2 class="text-center mb-5">Unsere Geschichte</h2>
-            <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem einem Zauberkasten gelegt …</p>
+            <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem Zauberkasten gelegt …</p>
             <p>… <strong>Und dann – kam Corona.</strong></p>
             <h3 style="color:var(--cyan)" class="text-center">Jetzt wird der Traum wahr!</h3>
             <p class="lead text-center">
                 Gemeinsam mit meinem Zauberbruder <strong>Gregor Mann</strong> verwandeln wir leerstehende Läden in magische Pop-Up-Bühnen.<br>
                 90 Minuten Lachen, Staunen und Gänsehaut – nur 30 cm Abstand zu den Wundern.
- Lewis.
             </p>
             <div class="team-photos">
                 <div>
@@ -231,12 +237,14 @@
                     <div class="caption">Foto: Gregor Mann</div>
                 </div>
                 <div>
-                    <img src="DINO HOCH.jpg" alt="Dionys B. Brüderlein">
+                    <!-- DINO HOCH.jpg mit Leerzeichen → URL-kodiert -->
+                    <img src="DINO%20HOCH.jpg" alt="Dionys B. Brüderlein">
                     <div class="caption">Dionys B. Brüderlein<br>Foto by Sebastian Konopix</div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- 5. KONTAKT -->
     <section id="contact">
         <div class="container">
@@ -262,14 +270,34 @@
             </div>
         </div>
     </section>
+
     <footer>
         © 2025 Pop Up Magietheater – Dionys Benjamin Brüderlein & Gregor Mann<br>
         <a href="impressum.html">Impressum</a> |
         <a href="datenschutz.html">Datenschutz</a>
     </footer>
+
     <script>
         function closeMenu() {
             document.getElementById('menu').classList.remove('show');
         }
         document.getElementById('burger').addEventListener('click', () => {
-            document.getElementById('
+            document.getElementById('menu').classList.toggle('show');
+        });
+        document.querySelectorAll('.menu a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                closeMenu();
+            });
+        });
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+        document.addEventListener('click', e => {
+            if (!e.target.closest('#burger') && !e.target.closest('#menu')) closeMenu();
+        });
+    </script>
+</body>
+</html>
