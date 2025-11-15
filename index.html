@@ -48,25 +48,38 @@
     padding: 0 20px;
     max-width: 90%;
 }
-/* ==== MOBILE ANPASSUNGEN – VOLLSTÄNDIGES BILD, KEIN ZOOM ==== */
+/* ==== MOBILE ANPASSUNGEN – VOLLSTÄNDIGES BILD, ZENTRIERT, ÜBERSCHRIFT OBEN ==== */
 @media (max-width: 767px) {
     .hero {
         height: auto;
         min-height: 60vh;
         padding-top: 80px;
+        display: block;
+        text-align: center;
+        position: relative;
     }
     .hero-img {
         position: relative;
         width: 100%;
+        max-width: 100%;
         height: auto;
         object-fit: contain;
         object-position: center top;
         display: block;
+        margin: 0 auto;
         z-index: 0;
     }
     .hero h1 {
+        position: relative;
+        z-index: 2;
         margin-top: 20px;
+        margin-bottom: 0;
         font-size: clamp(1.8rem, 7vw, 3.5rem);
+        text-align: center;
+        padding: 0 15px;
+    }
+    .hero::before {
+        display: none;
     }
 }
 /* ==== CTA-BAR UNTER DEM HERO ==== */
@@ -204,12 +217,13 @@
     <section id="about" class="bg-black">
         <div class="container">
             <h2 class="text-center mb-5">Unsere Geschichte</h2>
-            <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem Zauberkasten gelegt …</p>
+            <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem einem Zauberkasten gelegt …</p>
             <p>… <strong>Und dann – kam Corona.</strong></p>
             <h3 style="color:var(--cyan)" class="text-center">Jetzt wird der Traum wahr!</h3>
             <p class="lead text-center">
                 Gemeinsam mit meinem Zauberbruder <strong>Gregor Mann</strong> verwandeln wir leerstehende Läden in magische Pop-Up-Bühnen.<br>
                 90 Minuten Lachen, Staunen und Gänsehaut – nur 30 cm Abstand zu den Wundern.
+ Lewis.
             </p>
             <div class="team-photos">
                 <div>
@@ -258,22 +272,4 @@
             document.getElementById('menu').classList.remove('show');
         }
         document.getElementById('burger').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('show');
-        });
-        document.querySelectorAll('.menu a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                closeMenu();
-            });
-        });
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
-        document.addEventListener('click', e => {
-            if (!e.target.closest('#burger') && !e.target.closest('#menu')) closeMenu();
-        });
-    </script>
-</body>
-</html>
+            document.getElementById('
