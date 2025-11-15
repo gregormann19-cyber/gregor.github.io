@@ -12,10 +12,10 @@
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
 
-        /* ==== HERO – RESPONSIVES BILD, UNTEN ABGESCHNITTEN ==== */
+        /* ==== HERO – VOLLBILD MIT <img>, MOBIL VOLLSTÄNDIG, UNTEN ABGESCHNITTEN ==== */
         .hero {
-            min-height: 100vh;
             position: relative;
+            min-height: 100vh;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -23,27 +23,39 @@
             padding: 120px 20px 80px;
             text-align: center;
         }
+
         .hero::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: url('hero.jpg') center bottom / cover no-repeat;
-            background-attachment: fixed; /* Parallax-Effekt */
-            z-index: -2;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1;
         }
-        .hero::after {
-            content: "";
+
+        .hero-img {
             position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.75);
-            z-index: -1;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Vollständig sichtbar auf Mobil */
+            object-position: center bottom; /* Unten ausrichten → oben bleibt frei */
+            z-index: 0;
         }
+
+        /* Desktop & große Bildschirme: Bild füllt Breite, unten abschneiden */
+        @media (min-width: 768px) {
+            .hero-img {
+                object-fit: cover; /* Deckt alles ab */
+                object-position: center bottom; /* Unten abschneiden */
+            }
+        }
+
         .hero h1 {
+            position: relative;
+            z-index: 2;
             font-size: clamp(2.4rem, 9vw, 5.5rem);
             text-shadow: 0 0 30px #000;
             margin: 0;
-            position: relative;
-            z-index: 1;
         }
 
         /* ==== RESTLICHER CODE UNVERÄNDERT ==== */
@@ -95,6 +107,7 @@
     <div class="burger" id="burger">
         <i class="bi bi-list"></i>
     </div>
+
     <!-- Menü -->
     <nav class="menu" id="menu">
         <a href="#home" onclick="closeMenu()">Home</a>
@@ -108,6 +121,7 @@
 
     <!-- 1. HERO -->
     <section id="home" class="hero">
+        <img src="hero.jpg" alt="Zaubertheater Hintergrund" class="hero-img">
         <h1>Willkommen im Pop Up Zaubertheater</h1>
     </section>
 
