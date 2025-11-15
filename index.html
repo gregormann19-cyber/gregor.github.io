@@ -12,7 +12,7 @@
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
 
-        /* ==== HERO – DESKTOP: BILD HELL, KEIN OVERLAY ==== */
+        /* ==== HERO – DESKTOP ==== */
         .hero {
             position: relative;
             height: 80vh;
@@ -24,10 +24,12 @@
             padding-top: 80px;
             text-align: center;
         }
-
-        /* OVERLAY KOMPLETT ENTFERNT – BILD BLEIBT 100% HELL */
-        /* .hero::before { ... } ← GELÖSCHT */
-
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: none; /* kein Overlay */
+        }
         .hero-img {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -35,22 +37,19 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
-            z-index: 1;
+            z-index: 0; /* geändert */
         }
-
         .hero h1 {
             position: relative;
-            z-index: 2;
+            z-index: 2; /* geändert */
             font-size: clamp(2.2rem, 8vw, 4.5rem);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
             margin: 0;
             padding: 0 20px;
             max-width: 90%;
-            font-weight: 700;
-            color: var(--cyan);
+            text-shadow: none; /* entfernt */
         }
 
-        /* ==== MOBILE: BILD HELL, ÜBERSCHRIFT OBEN ==== */
+        /* ==== MOBILE ==== */
         @media (max-width: 767px) {
             .hero {
                 position: relative;
@@ -61,8 +60,12 @@
                 text-align: center;
             }
 
-            /* KEIN OVERLAY AUF MOBILE */
-            /* .hero::before { ... } ← GELÖSCHT */
+            .hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: none; /* kein Overlay */
+            }
 
             .hero-img {
                 position: relative;
@@ -73,7 +76,7 @@
                 object-position: center top;
                 display: block;
                 margin: 0 auto;
-                z-index: 1;
+                z-index: 0; /* geändert */
             }
 
             .hero h1 {
@@ -81,29 +84,27 @@
                 top: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                z-index: 2;
+                z-index: 2; /* geändert */
                 font-size: clamp(1.8rem, 7vw, 3.5rem);
-                text-shadow: 
-                    0 0 10px rgba(0,0,0,0.95),
-                    0 2px 6px rgba(0,0,0,0.9),
-                    0 4px 15px rgba(0,0,0,0.85);
                 margin: 0;
                 padding: 0 15px;
                 max-width: 90%;
                 width: 100%;
                 color: var(--cyan);
-                font-weight: 700;
+                text-shadow: none; /* entfernt */
             }
 
+            /* Mobile Burger */
             .burger {
-                width: 38px;
-                height: 38px;
-                top: 10px;
-                right: 10px;
-                box-shadow: 0 0 10px var(--cyan);
+                width: 46px;
+                height: 46px;
+                top: 12px;
+                right: 12px;
+                box-shadow: 0 0 15px var(--cyan);
             }
+
             .burger i {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
                 color: #9ffcff;
             }
         }
@@ -145,12 +146,12 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* ==== RESTLICHER CODE UNVERÄNDERT ==== */
+        /* ==== REST ==== */
         .burger {
-            position: fixed; top: 15px; right: 15px; z-index: 2000;
-            background: rgba(0,0,0,0.8); border-radius: 30%; width: 56px; height: 56px;
+            position: fixed; top: 15px; right: 15px; z-index: 3; /* geändert */
+            background: rgba(0,0,0,0.8); border-radius: 50%; width: 56px; height: 56px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px var(--cyan);
+            box-shadow: 0 0 20px var(--cyan);
         }
         .burger i { font-size: 2rem; color: var(--cyan); }
         .menu {
@@ -183,10 +184,12 @@
     </style>
 </head>
 <body>
+
     <!-- Burger -->
     <div class="burger" id="burger">
         <i class="bi bi-list"></i>
     </div>
+
     <!-- Menü -->
     <nav class="menu" id="menu">
         <a href="#home" onclick="closeMenu()">Home</a>
@@ -197,6 +200,7 @@
         <a href="impressum.html" target="_blank">Impressum</a>
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
+
     <!-- 1. HERO MIT CTA-BAR -->
     <section id="home" class="hero">
         <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
