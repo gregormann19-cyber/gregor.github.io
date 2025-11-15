@@ -64,7 +64,7 @@
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+                background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
                 z-index: 1;
             }
             .hero-img {
@@ -91,7 +91,20 @@
                 max-width: 90%;
                 width: 100%;
                 color: var(--cyan);
-            }
+            }    /* Mobile: kleinerer, besser sichtbarer Burger-Button */
+    .burger {
+        width: 46px;     /* vorher 56px */
+        height: 46px;
+        top: 12px;
+        right: 12px;
+        box-shadow: 0 0 15px var(--cyan); /* etwas dezenter */
+    }
+
+    .burger i {
+        font-size: 1.6rem;  /* vorher 2rem */
+        color: #9ffcff;     /* helleres Cyan → bessere Sichtbarkeit */
+    }
+
         }
 
         /* ==== CTA-BAR ==== */
