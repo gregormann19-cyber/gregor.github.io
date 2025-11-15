@@ -11,7 +11,6 @@
         :root { --cyan: #11e0e8; --light: #0a0a0a; }
         body { background: var(--light); color: #eee; font-family: 'Georgia', serif; line-height: 1.7; margin: 0; }
         h1, h2, h3 { color: var(--cyan) !important; }
-
         /* ==== HERO – DESKTOP ==== */
         .hero {
             position: relative;
@@ -48,7 +47,6 @@
             max-width: 90%;
             text-shadow: none; /* entfernt */
         }
-
         /* ==== MOBILE ==== */
         @media (max-width: 767px) {
             .hero {
@@ -59,14 +57,12 @@
                 overflow: hidden;
                 text-align: center;
             }
-
             .hero::before {
                 content: "";
                 position: absolute;
                 inset: 0;
                 background: none; /* kein Overlay */
             }
-
             .hero-img {
                 position: relative;
                 width: 100%;
@@ -78,7 +74,6 @@
                 margin: 0 auto;
                 z-index: 0; /* geändert */
             }
-
             .hero h1 {
                 position: absolute;
                 top: 20px;
@@ -93,7 +88,6 @@
                 color: var(--cyan);
                 text-shadow: none; /* entfernt */
             }
-
             /* Mobile Burger */
             .burger {
                 width: 46px;
@@ -102,13 +96,11 @@
                 right: 12px;
                 box-shadow: 0 0 15px var(--cyan);
             }
-
             .burger i {
                 font-size: 1.6rem;
                 color: #9ffcff;
             }
         }
-
         /* ==== CTA-BAR ==== */
         .hero-cta {
             background: rgba(17, 224, 232, 0.15);
@@ -145,7 +137,6 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-
         /* ==== REST ==== */
         .burger {
             position: fixed; top: 15px; right: 15px; z-index: 3; /* geändert */
@@ -184,12 +175,10 @@
     </style>
 </head>
 <body>
-
     <!-- Burger -->
     <div class="burger" id="burger">
         <i class="bi bi-list"></i>
     </div>
-
     <!-- Menü -->
     <nav class="menu" id="menu">
         <a href="#home" onclick="closeMenu()">Home</a>
@@ -200,10 +189,12 @@
         <a href="impressum.html" target="_blank">Impressum</a>
         <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </nav>
-
     <!-- 1. HERO MIT CTA-BAR -->
     <section id="home" class="hero">
-        <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
+        <picture>
+            <source media="(min-width: 768px)" srcset="hero-desktop.jpg">
+            <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
+        </picture>
         <h1>Willkommen im Pop Up Zaubertheater</h1>
     </section>
     <div class="hero-cta">
