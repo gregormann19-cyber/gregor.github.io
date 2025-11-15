@@ -132,6 +132,7 @@
             font-size: 1.2rem;
             color: var(--cyan);
             animation: bounce 2s infinite;
+            text-decoration: none;
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -195,23 +196,23 @@
             <source media="(min-width: 768px)" srcset="hero-desktop.jpg">
             <img src="hero.jpg" alt="Zaubertheater" class="hero-img">
         </picture>
-        <h1>Willkommen im Pop Up Magietheater</h1>
+        <h1>Willkommen im Pop Up Zaubertheater</h1>
     </section>
     <div class="hero-cta">
         <a href="#tickets">
             <i class="bi bi-ticket-perforated"></i> Jetzt Tickets sichern
         </a>
-        <div class="scroll-hint">
+        <a href="#tickets" class="scroll-hint">
             <i class="bi bi-chevron-down"></i> Mehr erfahren
-        </div>
+        </a>
     </div>
     <!-- 2. TICKETS -->
     <section id="tickets" class="text-center bg-black">
         <div class="container">
             <h2>Sichern Sie sich magische Momente!</h2>
-            <p class="lead mb-5">Close-Up Magie – nur 40 Plätze pro Show</p>
-            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6?fbclid=PAb21jcAOFzL5leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcIY2FsbHNpdGUCMTUAAacDALMmscyXhTCdmCQcr0Iiya9wMudfwojjApMh3q8TQPKD3UOWun2GnEDURQ_aem_01TL2jqaIaX5KHjnkCiR8A" target="_blank" class="ticket-btn">
-                <i class="bi bi-ticket-perforated"></i> Jetzt Tickets sichern
+            <p class="lead mb-5">Close-Up Magie – nur 35 Plätze pro Show</p>
+            <a href="https://www.eventim-light.com/de/a/68dd3a21d4e8cc4e1e039ef6/e/68ff87d6747cf2650bc2ee5f" target="_blank" class="ticket-btn">
+                <i class="bi bi-ticket-perforated"></i> Jetzt Tickets kaufen
             </a>
             <p class="mt-3 text-muted">powered by Eventim</p>
         </div>
@@ -239,7 +240,7 @@
     <section id="about" class="bg-black">
         <div class="container">
             <h2 class="text-center mb-5">Unsere Geschichte</h2>
-            <p class="lead text-center">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem Zauberkasten gelegt …</p>
+            <p class="lead">Wie bei den meisten Zunftkollegen wurde der Grundstein bereits mit einem Zauberkasten gelegt …</p>
             <p>… <strong>Und dann – kam Corona.</strong></p>
             <h3 style="color:var(--cyan)" class="text-center">Jetzt wird der Traum wahr!</h3>
             <p class="lead text-center">
@@ -295,7 +296,7 @@
         document.getElementById('burger').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('show');
         });
-        document.querySelectorAll('.menu a[href^="#"]').forEach(link => {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
