@@ -267,7 +267,7 @@
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <video src="video.mp4" controls class="img-fluid rounded shadow" alt="Show Video"></video>
+                    <video src="video.mp4" muted playsinline controls class="img-fluid rounded shadow" poster="thumbnail.jpg"></video>
                 </div>
             </div>
         </div>
@@ -346,6 +346,21 @@
         document.addEventListener('click', e => {
             if (!e.target.closest('#burger') && !e.target.closest('#menu')) closeMenu();
         });
+
+        // Neu: Autoplay Video bei Visibility
+        const video = document.querySelector('video');
+        if (video) {
+            const videoObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(error => console.log('Autoplay prevented:', error));
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 }); // 50% sichtbar
+            videoObserver.observe(video);
+        }
     </script>
 </body>
 </html>
